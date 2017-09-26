@@ -1,0 +1,52 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+.content {
+  float: left;
+  width: 650px;
+  height: 500px;
+}
+.page {
+  width: 900px;
+  margin: 0 auto;
+  background-color: #EAEDF0;
+}
+.container {
+  overflow: hidden;
+  background-color: #EAEDF0;
+}
+.menu {
+  text-align: center;
+  vertical-align: center;
+  height: 100px;
+  background-color: aqua;
+  font: 32px Helvetica, Serif;
+  color: white;
+  text-shadow:2px 2px black;
+}
+
+.sidebar {
+  float: left;
+  width: 200px;
+  height: 300px;
+  background-color: #f4b942;
+  border: 5px solid #f25d26;
+  padding-top:5px;
+  padding-left:5px;
+  font: 14px Courier New, sans-serif;
+}
+
+.content {
+  height: 500px;
+  background-color: #F5CF8E;
+}
+
+.footer {
+  clear: both;
+  height: 30px;
+  background-color: blue;
+  color:white;
+  text-align:right;
+}
