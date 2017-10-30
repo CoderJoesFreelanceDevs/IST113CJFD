@@ -3,7 +3,8 @@
 // using a function contructor form to create an object
 function TaskAtHandApp()
 {
-	var version = "v1.0";
+	var version = "v1.0",
+	appStorage = new AppStorage("taskAtHand");
 
 	// creating a private function
 	function setStatus(message)
@@ -15,6 +16,7 @@ function TaskAtHandApp()
 	this.start = function()
 	{
 		$("#app>header").append(version);
+		loadTaskList();
 		setStatus("ready");
 				
 		$("#newtask").keypress(function(e) {
@@ -37,6 +39,7 @@ function TaskAtHandApp()
 			addToList(task);
 			$("#newTask").val("").focus();
 		}
+		saveTaskList();
 	}
 	
 	function addToList(taskName)
@@ -46,16 +49,16 @@ function TaskAtHandApp()
 		$("span.task-name", $task).text(taskName);
 		$("#taskslist").append($task);
 		$("button.delete", $task).click(function() {
-		$task.remove();
+			deleteTask($task);
 		});
 		$("button.move-up", $task).click(function() {
-		$task.insertBefore($task.prev());
+			moveUpTask($task);
 		});
 		$("button.move-down", $task).click(function() {
-		$task.insertAfter($task.next());
+			moveDownTask($task);
 		});
 		$("span.task-name", $task).click(function() {
-		editTask($(this));
+			editTask($(this));
 		});
 		$("input.task-name", $task).change(function() {
 		changeTaskName($(this));
@@ -65,6 +68,24 @@ function TaskAtHandApp()
 		});
 	}
 	
+	function deleteTask($task)
+	{
+		$task.remove();
+		saveTaskList();
+	}
+	
+	function moveUpTask($task)
+	{
+		$task.insertBefore($task.prev());
+		saveTaskList();
+	}
+	
+	function moveDownTask($task)
+	{
+		$task.insertAfter($task.next());
+		saveTaskList();
+	}
+	
 	function editTask($name)
 	{
 		$name.hide()
@@ -72,6 +93,7 @@ function TaskAtHandApp()
 			.val($name.text())
 			.show()
 			.focus();
+		saveTaskList();
 	}
 	
 	function changeTaskName($input)
@@ -83,10 +105,32 @@ function TaskAtHandApp()
 			$span.text($input.val());
 		}
 		$span.show();
+		saveTaskList();
 	}
 	
-} // end MyApp
-
+	function saveTaskList()
+	{
+		var tasks = [];
+		$("#taskslist .task span.task-name").each(function() {
+		tasks.push($(this).text());
+		});
+		appStorage.setValue("taskList", tasks);
+		//alert(tasks);
+	}
+	
+	function loadTaskList()
+	{
+		var tasks = appStorage.getValue("taskList");
+		if (tasks)
+		{
+			for (var i in tasks)
+			{
+				addToList(tasks[i]);
+			}
+		}
+	}
+		// end MyApp
+}
 /* 	JQuery's shorthand for the document ready event handler
 		could be written: $(document).ready(handler);
 
