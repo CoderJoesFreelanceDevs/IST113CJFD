@@ -39,36 +39,51 @@ function TaskAtHandApp()
 		}
 	}
 	
-	function addToList(task)
+	function addToList(taskName)
 	{
-		var $item = $("<li></li>");
-		$item.text(task);
-		$("#taskslist").append($item);
-		var $del = $("<button class='del'>X</button>");
-		var $up = $("<button class='up'>^</button>");
-		var $down = $("<button class='down'>_</button>");
-		$item.append($del);
-		$item.append($up);
-		$item.append($down);
-			//.append("<span class='taskslist'>" + task + "</span>");
-		$up.click(function(){
-			$item.insertBefore($item.prev());
-		}); 
-		$down.click(function(){
-			$item.insertAfter($item.next());
-		}); 
-		$del.click(function(){
-			$item.remove();
-		}); 
-		
+		//Note: old function was replaced to incorporate template
+		var $task = $("#task-template .task").clone();
+		$("span.task-name", $task).text(taskName);
+		$("#taskslist").append($task);
+		$("button.delete", $task).click(function() {
+		$task.remove();
+		});
+		$("button.move-up", $task).click(function() {
+		$task.insertBefore($task.prev());
+		});
+		$("button.move-down", $task).click(function() {
+		$task.insertAfter($task.next());
+		});
+		$("span.task-name", $task).click(function() {
+		editTask($(this));
+		});
+		$("input.task-name", $task).change(function() {
+		changeTaskName($(this));
+		});
+		$("span.task-name", $task).blur(function() {
+		$(this).hide().siblings("span.task-name").show();
+		});
 	}
 	
-	function removeFromList(item)
+	function editTask($name)
 	{
-		
-		
+		$name.hide()
+			.siblings("input.task-name")
+			.val($name.text())
+			.show()
+			.focus();
 	}
 	
+	function changeTaskName($input)
+	{
+		$input.hide();
+		var $span = $input.siblings("span.task-name");
+		if ($input.val())
+		{
+			$span.text($input.val());
+		}
+		$span.show();
+	}
 	
 } // end MyApp
 
