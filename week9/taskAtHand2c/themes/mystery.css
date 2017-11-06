@@ -1,0 +1,30 @@
+#task-list .task:hover
+{
+	-webkit-transform: skew(4deg,0);
+	-moz-transform: skew(4deg,0);
+	-o-transform: skew(4deg,0);
+	-ms-transform: skew(4deg,0);
+	transform: skew(4deg,0);
+	font-weight:bold;
+	
+}
+
+#newtask:focus-within
+{
+	-webkit-transform: scale(1,1.2);
+	-moz-transform: scale(1,1.2);
+	-o-transform: scale(1,1.2);
+	-ms-transform: scale(1,1.2);
+	transform: scale(1,1.2);
+	font-weight:bold;
+}
+
+#newtask:hover
+{
+	-webkit-transform: scale(1.1,1.2);
+	-moz-transform: scale(1,1.2);
+	-o-transform: scale(1,1.2);
+	-ms-transform: scale(1,1.2);
+	transform: scale(1,1.2);
+	font-weight:bold;
+}
