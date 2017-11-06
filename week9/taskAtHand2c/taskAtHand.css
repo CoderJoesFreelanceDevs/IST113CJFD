@@ -33,8 +33,7 @@ button {
 	background: -moz-linear-gradient(top, #bbc, #558);
 	background: -ms-linear-gradient(top, #bbc, #558);
 	background: linear-gradient(top, #bbc, #558);
-	/*min-width: 9em;
-	max-width: 25em;*/'
+	
 		
 }
 #app>header {

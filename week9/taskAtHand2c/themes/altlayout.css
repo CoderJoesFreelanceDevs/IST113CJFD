@@ -1,4 +1,33 @@
+#app>footer {
+	position: relative;
+	bottom: 0;
+	padding: 0;
+	float:top;
+}
+
+#newtask
+{
+	margin: 0;
+	width:100%;
+	float: center;
+	font-family: serif;
+	font-size:1.5em;
+	background-color: WhiteSmoke;
+}
+#task-list
+{
+	padding:0;
+	margin-top:0;
+	background-color: #006;
+	background: -webkit-linear-gradient(bottom, #006, blue);
+	background: -moz-linear-gradient(bottom, #006, blue);
+	background: -ms-linear-gradient(bottom, #006, blue);
+	background: linear-gradient(bottom, #006, blue);
+	border: 2px solid #006;
+	margin-bottom:0;
+	
+}
 #task-list .task
 {
-	
+	width: 15em;
 }
