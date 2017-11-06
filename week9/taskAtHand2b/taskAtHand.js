@@ -26,8 +26,14 @@ function TaskAtHandApp()
 			newTask();
 			return false;
 		}
-		$("#theme").change(onChangeTheme);
+		
+		
+		
+		
 	})	.focus();
+		loadTheme();
+		//FIX: moved themecall to addToList
+		//hindsight 20/20: clearly need to load theme on start, create listener in addToList
 	};
 	
 	function newTask()
@@ -50,6 +56,7 @@ function TaskAtHandApp()
 		$("span.task-name", $task).text(taskName);
 		$("#task-list").append($task);
 		$task.click(function() { onSelectTask($task); });
+		$("#theme").change(onChangeTheme);
 		$("button.delete", $task).click(function() {
 			deleteTask($task);
 		});
@@ -114,7 +121,25 @@ function TaskAtHandApp()
 	{
 		var theme = $("#theme>option").filter(":selected").val();
 		setTheme(theme);
+		//NOTE: theme fails to save, or load?
 		appStorage.setValue("theme", theme);
+	}
+	
+	function setTheme(theme)
+	{
+		$("#theme-style").attr("href", "themes/" + theme + ".css");
+	}
+
+	
+	function loadTheme()
+	{
+		var theme = appStorage.getValue("theme");
+		if (theme)
+		{
+			setTheme(theme);
+			$("#theme>option[value=" + theme + "]")
+			.attr("selected","selected");
+		}
 	}
 	
 	function onSelectTask($task)
@@ -128,21 +153,7 @@ function TaskAtHandApp()
 		}
 	}
 	
-	function setTheme(theme)
-	{
-		$("#theme-style").attr("href", "themes/" + theme + ".css");
-	}
-
-	var theme = appStorage.getValue("theme");
-	function loadTheme()
-	{
-		if (theme)
-		{
-		setTheme(theme);
-		$("#theme>option[value=" + theme + "]")
-		.attr("selected","selected");
-		}
-	}
+	
 	function saveTaskList()
 	{
 		var tasks = [];
