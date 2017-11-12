@@ -7,6 +7,7 @@
 		<script src="lib/jquery-3.2.1.min.js"></script>
 		<script src="taskAtHand.js"></script>
 		<script src="appStorage.js"></script>
+		<script src="taskList.js"></script>
 	</head>
 	<body>
 		<div id="app">
@@ -36,25 +37,25 @@
 					</div>
 					<div class="details">
 						<label>Start date:</label>
-						<input type="date"/><br/>
+						<input type="date" data-field="startDate"/><br/>
 						<label>Due Date:</label>
-						<input type="date"/><br/>
+						<input type="date" data-field="endDate"/><br/>
 						<label> Status: </label>
-						<select>
+						<select data-field="status">
 							<option value="0">None</option>
 							<option value="1">Not Started</option>
 							<option value="2">Started</option>
 							<option value="3">Completed</option>
 						</select><br/>
 						<label>Priority:</label>
-						<select>
+						<select data-field="priority">
 							<option value="0">None</option>
 							<option value="1">Low</option>
 							<option value="2">Normal</option>
 							<option value="3">High</option>
 						</select><br/>
 						<label>%&nbsp;Complete:</label>
-						<input type="number min="0" max="100" step="10" value="0"/>
+						<input type="number" data-field="pctComplete"/>
 					</div>
 					<span class="task-name"></span>
 					<input type="text" class="task-name hidden"/>

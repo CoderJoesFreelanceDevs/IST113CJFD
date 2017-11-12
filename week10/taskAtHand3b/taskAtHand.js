@@ -5,11 +5,18 @@ function TaskAtHandApp()
 {
 	var version = "v1.0",
 	appStorage = new AppStorage("taskAtHand");
-
+	taskList = new TaskList();
+	timeoutId = 0;
+	
 	// creating a private function
-	function setStatus(message)
+	function setStatus(message, noFade)
 	{
-		$("#app>footer").text(message);
+		$("#app>footer").text(message).show();
+		if (!noFade)
+		{
+			$("#app>footer").fadeOut(1000);
+		}
+		//$("#app>footer").text(message);
 	}
 
 	// creating a public function
@@ -42,6 +49,9 @@ function TaskAtHandApp()
 		//alert();
 		if(task)
 		{
+			var taskName = new Task(task);
+			taskList.addTask(taskName);
+			appStorage.setValue("nextTaskID", Task.nextTaskId);
 			//alert("newTask isnt null");
 			addToList(task);
 			$("#newTask").val("").focus();
@@ -53,7 +63,8 @@ function TaskAtHandApp()
 	{
 		//Note: old function was replaced to incorporate template
 		var $task = $("#task-template .task").clone();
-		$("span.task-name", $task).text(taskName);
+		$taskName.data("task-id",task.id);
+		$("span.task-name", $task).text(taskName.name);
 		$("#task-list").append($task);
 		$task.click(function() { onSelectTask($task); });
 		$("#theme").change(onChangeTheme);
@@ -74,6 +85,14 @@ function TaskAtHandApp()
 		});
 		$("button.toggle-details", $task).click(function(){
 			toggleDetails($task);
+		});
+		$(".details input, .details select", $task).each(function() {
+		var $input = $(this);
+		var fieldName = $input.data("field");
+		$input.val(task[fieldName]);
+		});
+		$(".details input, .details select", $task).change(function() {
+		onChangeTaskDetails(task.id, $(this));
 		});
 		$("span.task-name", $task).blur(function() {
 		$(this).hide().siblings("span.task-name").show();
@@ -118,6 +137,46 @@ function TaskAtHandApp()
 		}
 		$span.show();
 		saveTaskList();
+	}
+
+	function onChangeTaskDetails(taskId, $input)
+	{
+		var task = taskList.getTask(taskId)
+		if (task)
+		{
+			var fieldName = $input.data("field");
+			task[fieldName] = $input.val();
+			saveTaskList();
+		}
+	}
+	
+	function saveTaskList()
+	{
+		if (timeoutId) clearTimeout(timeoutId);
+			setStatus("saving changes...", true);
+		timeoutId = setTimeout(function()
+		{
+			appStorage.setValue("taskList", taskList.getTasks());
+			timeoutId = 0;
+			setStatus("changes saved.");
+		},
+		2000);
+	}
+	
+	function loadTaskList()
+	{
+		var tasks = appStorage.getValue("taskList");
+		taskList = new TaskList(tasks);
+		rebuildTaskList();
+	}
+	
+	function rebuildTaskList()
+	{
+		$("#task-list").empty();	
+		taskList.each(function(task)
+		{
+			addTaskElement(task);
+		});
 	}
 	
 	function onChangeTheme()
@@ -167,7 +226,7 @@ function TaskAtHandApp()
 	{
 		var tasks = [];
 		$("#task-list .task span.task-name").each(function() {
-		tasks.push($(this).text());
+			tasks.push($(this).text());
 		});
 		appStorage.setValue("taskList", tasks);
 		//alert(tasks);
