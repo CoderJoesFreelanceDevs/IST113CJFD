@@ -13,7 +13,14 @@
 			<header>Weather App</header>
 			<div id="weather-widget">
 			<div id="controls">
+				<div>
+					Latitude: <input id="latitude" type="text"/><br/>
+					Longitude: <input id="longitude" type="text"/>
+				</div>
 				<button id="getWeather">Check the Weather</button>
+				<div class="error">
+					Error: <span></span>
+				</div>
 			</div>
 			<div class="loading">
 				<p>Checking the weather...</p>

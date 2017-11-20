@@ -1,23 +1,5 @@
 /*
-    Create a folder in your local class repo called: guessGame
-    Create the files: guessGame.html, guessGame.css, and guessGame.js in your guessGame folder
-    Create a simple HTML and CSS interface
-    Use an <input> field to collect responses
-    Output instructions and responses to a <span> in your UI
-    Include a way to start playing the game again
-    Deploy your app to Azure through GitHub
-    Submit the working link to your Azure app to this assignment
-	------------------------------------------------------------------------------	
-    Setup a local development environment including GitHub Desktop and WS for Chrome
-    In your local class repo, copy folder appFrame to appFrameGame
-    Using the app framework, reimplement your HTML Guessing Game (same requirements)
-        ALL game JavaScript must be inside function MyApp() within app.js
-        ALL game HTML must be within the #main div
-        Game CSS must be integrated with (not break) the existing app frame CSS
-    Commit and push to GitHub
-    Verify your app is available on Azure
-    Demonstrate for the instructor
-    Submit your working link to your Azure app for this assignment
+    
 */
 
 "use strict";
@@ -48,6 +30,25 @@ function MyApp()
 		$("#title").text("Welcome to the Weather App.");
 		ww = new WeatherWidget("#weather-widget");
 	};
+	
+	function getLocation()
+	{
+		if (navigator.geolocation)
+		{
+			navigator.geolocation.getCurrentPosition(
+			function(position)
+			{
+				$("#latitude").val(position.coords.latitude);
+				$("#longitude").val(position.coords.longitude);
+			},
+			function(error)
+			{
+				$("#controls .error")
+					.text("ERROR: " + error.message)
+						.slideDown();
+			});
+		}
+	}
 } // end MyApp
 
 /* 	JQuery's shorthand for the document ready event handler
