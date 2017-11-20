@@ -9,12 +9,12 @@ function WeatherWidget($widget)
 	function getWeatherReport()
 	{
 		$.get("data/weather.xml")
-		.done(function(data) {
-			populateWeather(data);
-		})
-		.fail(function(jqXHR, textStatus, errorThrown) {
-			showError(errorThrown);
-		});
+			.done(function(data) {
+				populateWeather(data);
+			})
+			.fail(function(jqXHR, textStatus, errorThrown) {
+				showError(errorThrown);
+			});
 	}
 	
 	function showError(errorThrown)
@@ -24,14 +24,14 @@ function WeatherWidget($widget)
 	
 	function populateWeather(data)
 	{
-		var observation = $("current_observation",data);
+		var $observation = $("current_observation",data);
 		$(".results header img", $widget).attr("src", $("icon_url", $observation).text());
 		$(".location>span", $widget).text($("location", data).text());
 		$(".conditions>span").each(function(i, e)
 		{
 			var $span = $(this);
 			var field = $span.data("field");
-			$(this).text(observation[field]);
+			$(this).text($(field, $observation).text());
 		});
 		$(".loading", $widget).fadeOut(function ()
 		{

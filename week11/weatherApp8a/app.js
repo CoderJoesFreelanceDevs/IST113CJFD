@@ -46,7 +46,7 @@ function MyApp()
 		setStatus("ready");
 		
 		$("#title").text("Welcome to the Weather App.");
-		ww = new WeatherWidget("test");
+		ww = new WeatherWidget("#weather-widget");
 	};
 } // end MyApp
 
