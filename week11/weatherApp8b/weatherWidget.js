@@ -8,7 +8,7 @@ function WeatherWidget($widget)
 	};
 	function getWeatherReport()
 	{
-		$.get("data/weather.json", {
+		$.getJSON("data/weather.json", {
 			t: new Date().getTime()
 		})
 			.done(function(data) {
