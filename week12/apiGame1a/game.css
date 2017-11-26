@@ -1,0 +1,27 @@
+body
+{
+	margin:auto;
+	width:50%;
+	padding:30px;
+	font-size: 1.6em;
+}
+
+#controls
+{
+	text-align: center;
+}
+
+#output
+{
+	font-family: "Courier New", sans-serif;
+	border:4px solid blue;
+}
+
+#errors
+{
+	color: red;
+	font-size:1.2em;
+	font-family: sans-serif;
+	border: 2px dashed red;
+	height: 30px;
+}
