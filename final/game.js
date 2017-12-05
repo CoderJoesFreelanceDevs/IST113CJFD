@@ -205,7 +205,7 @@ function Game()
 			pointsUpdate(valpoints,true);
 		else			
 			pointsUpdate(valpoints,false)
-		$(".answer>span").text(correctAnswer);
+		$(".answer>span").text("What is "+correctAnswer);
 		correctAnswer = null;
 	}
 	

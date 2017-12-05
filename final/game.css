@@ -4,7 +4,7 @@ body
 	width:50%;
 	padding:30px;
 	font-size: 1.6em;
-	background-color:grey;
+	background:linear-gradient(grey,black);
 }
 
 table
