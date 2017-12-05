@@ -7,6 +7,11 @@ body
 	background:linear-gradient(grey,black);
 }
 
+footer
+{
+	color:white;
+}
+
 table
 {
 	width: 1600px;
@@ -43,13 +48,6 @@ td
 	outline: 3px solid grey;
 }
 
-#buzzerArea
-{
-	
-	
-	
-}
-	
 #bigButton
 {
     margin-left: 50%;

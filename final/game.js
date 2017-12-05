@@ -8,6 +8,7 @@ function Game()
 	var corNum
 	var valpoints;
 	var nudata;
+	var questionId;
 	for(var i = 0; i < 6; i++)
 		completed[i] = new Array(6);
 	var points = 0;
@@ -17,6 +18,7 @@ function Game()
 		$("#getQuestion").click(function(){newGame();});
 		$("td").each(function(){
 			$(this).click(function(){
+				$(".error>span").text("");
 				//Class count is the Category number
 				var classCount = $(this).attr('class');
 				
@@ -57,6 +59,7 @@ function Game()
 		for(var i = 0; i < 6; i++)
 			completed[i] = new Array(6);
 		points = 0;
+		pointsUpdate(0,true);
 	}
 	
 	function getRandomQuestion()
@@ -105,8 +108,7 @@ function Game()
 				let category = {title:data[i].category.title , id:data[i].category.id}
 				categories[i] = category;
 			}
-			//psuedo code: for each header:
-				//-
+			
 			var i = 0;
 			$("th").each(function()
 			{
@@ -132,6 +134,7 @@ function Game()
 			$(".value>span").text((jData.value).toString());
 			$(".answer>span").text(null);
 			correctAnswer = jData.answer;
+			questionId = jData.id;
 		}
 		catch(err)
 		{
@@ -149,18 +152,13 @@ function Game()
 			temp = $(this).val();
 			tempfull = $(this);
 			console.log(temp);
-			//if($(this).attr("value")==corNum)
 			if(temp==corNum)
 			{
-				//console.log("The value of this button is : "+$(this).attr("value")+", matching corNum @ "+corNum);
 				console.log("The value of this button is : "+temp+", matching corNum @ "+corNum);
 				$("label[for='"+tempfull.attr("id")+"']").text(correctAnswer);
-				//console.log("Correct answer added! What is "+correctAnswer+"? This is value "+corNum);
 			}
 			else
 			{
-				//console.log("One fake answer is: "+ndata[0].answer+", at value "+$(this).attr("value"));
-					//console.log("One fake answer is: "+nudata[0].answer+", at value "+temp);
 					tempanswer = getRandomAnswer(jData.category_id,tempfull);
 					console.log("temp: "+tempanswer);
 					$("label[for='"+tempfull.attr("id")+"']").text(tempanswer);
@@ -171,13 +169,16 @@ function Game()
 	
 	function getRandomAnswer(id,htmm)
 	{
-		var tmpNum = Math.floor(Math.random()*(9-1)+1);
-		$.get("http://jservice.io/api/clues",{ category:id, offset:tmpNum})
+		var tmpNum = Math.floor(Math.random()*(9-1));
+		$.get("http://jservice.io/api/clues",{ category:id})
 		.done(function(ndata)
 		{
-			console.log("good data return"+ndata[0].answer);
-			$("label[for='"+htmm.attr("id")+"']").text(ndata[0].answer);
-			return ndata[0].answer;
+			//simple loop to ensure no repeat random answers
+			while(ndata[tmpNum].id==questionId)
+				tmpNum++;
+			//console.log("good data return"+ndata[tmpNum].answer);
+			$("label[for='"+htmm.attr("id")+"']").text(ndata[tmpNum].answer);
+			return ndata[tmpNum].answer;
 		})
 		.fail(function(jqXHR, textStatus, errorThrown) 
 		{
@@ -205,7 +206,7 @@ function Game()
 			pointsUpdate(valpoints,true);
 		else			
 			pointsUpdate(valpoints,false)
-		$(".answer>span").text("What is "+correctAnswer);
+		$(".answer>span").text("What is "+correctAnswer+"?");
 		correctAnswer = null;
 	}
 	
