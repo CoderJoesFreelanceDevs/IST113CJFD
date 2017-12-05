@@ -154,13 +154,13 @@ function Game()
 			console.log(temp);
 			if(temp==corNum)
 			{
-				console.log("The value of this button is : "+temp+", matching corNum @ "+corNum);
+				//console.log("The value of this button is : "+temp+", matching corNum @ "+corNum);
 				$("label[for='"+tempfull.attr("id")+"']").text(correctAnswer);
 			}
 			else
 			{
 					tempanswer = getRandomAnswer(jData.category_id,tempfull);
-					console.log("temp: "+tempanswer);
+					//console.log("temp: "+tempanswer);
 					$("label[for='"+tempfull.attr("id")+"']").text(tempanswer);
 			}
 			ii++;
@@ -200,7 +200,7 @@ function Game()
 	
 	function answerQuestion()
 	{
-		console.log("radio selected value is "+$("input:radio:checked").val());
+		//console.log("radio selected value is "+$("input:radio:checked").val());
 		//if selected radio button is correct
 		if($("input:radio:checked").val()==corNum)
 			pointsUpdate(valpoints,true);
