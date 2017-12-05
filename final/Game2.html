@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html><head>
+<meta http-equiv="content-type" content="text/html; charset=windows-1252">
+		<title>Game</title>
+		<link href="game.css" rel="StyleSheet">
+		<script src="jquery-3.js"></script>
+		<script src="game.js"></script>		
+	</head>
+	<body>
+		<div id="app">
+			<div id="controls">
+				<header>Are YOU prepared for JEPORADY?</header>
+				<button id="getQuestion">New Game</button>
+				<div id="yourpoints"><span></span> Points</div>
+			</div>
+			<div id="output">
+				<div class="value">For <span></span> points:</div>
+				<div class="category">Category: <span></span></div>
+				<div class="question">Clue: <span></span></div>
+				<div class="answer">Answer: What is <span></span>?</div>
+			</div>
+			<div id="buzzerArea">
+				<div id="bigButton">THE BUZZER</div>
+				<form id="radios">
+					<input type="radio" name="radgroup" value="1" id="choice1">
+					<label for="choice1"></label>
+					<input type="radio" name="radgroup" value="2" id="choice2">
+					<label for="choice2"></label>
+					<input type="radio" name="radgroup" value="3" id="choice3">
+					<label for="choice3"></label>
+				</form>
+			</div>
+			<div id="errors">
+				<div class="error"><span></span></div>
+			</div>
+			<div id="gameboard">
+				<table>
+					<tr>
+						<th class="cat1">Category 1</th>
+						<th class="cat2">Category 2</th>
+						<th class="cat3">Category 3</th>
+						<th class="cat4">Category 4</th>
+						<th class="cat5">Category 5</th>
+						<th class="cat6">Category 6</th>
+					</tr>
+					<tr>
+						<td class="cat1">200</td>
+						<td class="cat2">200</td>
+						<td class="cat3">200</td>
+						<td class="cat4">200</td>
+						<td class="cat5">200</td>
+						<td class="cat6">200</td>
+					</tr>
+					<tr>
+						<td class="cat1">400</td>
+						<td class="cat2">400</td>
+						<td class="cat3">400</td>
+						<td class="cat4">400</td>
+						<td class="cat5">400</td>
+						<td class="cat6">400</td>
+					</tr>
+					<tr>
+						<td class="cat1">600</td>
+						<td class="cat2">600</td>
+						<td class="cat3">600</td>
+						<td class="cat4">600</td>
+						<td class="cat5">600</td>
+						<td class="cat6">600</td>
+					</tr>
+					<tr>
+						<td class="cat1">800</td>
+						<td class="cat2">800</td>
+						<td class="cat3">800</td>
+						<td class="cat4">800</td>
+						<td class="cat5">800</td>
+						<td class="cat6">800</td>
+					</tr>
+					<tr>
+						<td class="cat1">1000</td>
+						<td class="cat2">1000</td>
+						<td class="cat3">1000</td>
+						<td class="cat4">1000</td>
+						<td class="cat5">1000</td>
+						<td class="cat6">1000</td>
+					</tr>
+				</table>
+			</div>
+			<footer>End of Game app</footer>
+		</div>
+	
+</body></html>

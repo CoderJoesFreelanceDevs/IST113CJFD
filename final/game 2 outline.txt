@@ -1,0 +1,21 @@
+game2 outline: (A: mandatory, B: secondary)
+
+I. Game Setup
+	A. One board: six categories
+		i. functions
+			1. fillBoard
+			2. click on tile elements
+				a. HTML5 table styled with CSS
+					a. make category text allcaps in javascript
+				a. click on quadrant to bring up full screen clue
+					a. nice looking animations
+					a. select one of four answers
+						a. one is correct, the other are answers from other fresh pulled questions
+	A.1-2 players
+		i. whomever gets the most points, save for tie
+		ii. instate final jeporady
+	A. Solo 
+		i. 
+	
+II. Visuals
+III. 
